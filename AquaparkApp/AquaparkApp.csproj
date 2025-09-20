@@ -6,10 +6,30 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyTitle>Аквапарк - Система управления</AssemblyTitle>
-    <AssemblyDescription>Приложение для управления аквапарком</AssemblyDescription>
+    
+    <!-- Информация о приложении -->
+    <AssemblyTitle>Аквапарк Водный мир</AssemblyTitle>
+    <AssemblyDescription>Система управления аквапарком</AssemblyDescription>
+    <AssemblyCompany>Aquapark Management Systems</AssemblyCompany>
+    <AssemblyProduct>Aquapark Management System</AssemblyProduct>
+    <AssemblyCopyright>Copyright © 2024</AssemblyCopyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
+    
+    <!-- Настройки для уменьшения ложных срабатываний антивирусов -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishTrimmed>false</PublishTrimmed>
+    
+    <!-- Отключить оптимизации, которые могут вызвать подозрения -->
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    
+    <!-- Настройки безопасности -->
+    <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>false</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
   <ItemGroup>
