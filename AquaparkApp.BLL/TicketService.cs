@@ -14,6 +14,12 @@ namespace AquaparkApp.BLL
             _attractionRepository = new AttractionRepository();
         }
 
+        public TicketService(string connectionString)
+        {
+            _ticketRepository = new TicketRepository(connectionString);
+            _attractionRepository = new AttractionRepository(connectionString);
+        }
+
         public async Task<IEnumerable<Ticket>> GetUserTicketsAsync(int userId)
         {
             return await _ticketRepository.GetByUserIdAsync(userId);

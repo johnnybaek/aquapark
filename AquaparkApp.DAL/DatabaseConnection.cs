@@ -16,12 +16,17 @@ namespace AquaparkApp.DAL
         {
             try
             {
-                using var connection = GetConnection();
-                await connection.OpenAsync();
+                using var connection = GetConnection() as NpgsqlConnection;
+                if (connection != null)
+                {
+                    await connection.OpenAsync();
+                }
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                // Логируем ошибку для отладки
+                System.Diagnostics.Debug.WriteLine($"Database connection error: {ex.Message}");
                 return false;
             }
         }

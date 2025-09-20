@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AquaparkApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf1bc8fdae8e13e3d6fbb220e0b49817d60e0dc7")]
 [assembly: System.Reflection.AssemblyProductAttribute("AquaparkApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Аквапарк - Система управления")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

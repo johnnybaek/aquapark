@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using AquaparkApp.Models;
 
 namespace AquaparkApp.Controls
 {
@@ -23,7 +24,7 @@ namespace AquaparkApp.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 0;
-            BackColor = Color.Transparent;
+            BackColor = Color.White;
             ForeColor = Color.White;
             Font = new Font("SF Pro Display", 14F, FontStyle.Regular);
             Cursor = Cursors.Hand;
@@ -194,7 +195,7 @@ namespace AquaparkApp.Controls
         public GlassPanel()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
-            BackColor = Color.Transparent;
+            BackColor = Color.White;
         }
 
         protected override void OnPaint(PaintEventArgs e)

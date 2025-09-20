@@ -5,6 +5,10 @@ namespace AquaparkApp.DAL
 {
     public class TicketRepository : BaseRepository<Ticket>
     {
+        public TicketRepository() : base() { }
+        
+        public TicketRepository(string connectionString) : base(connectionString) { }
+
         protected override string GetTableName() => "Tickets";
 
         public async Task<IEnumerable<Ticket>> GetByUserIdAsync(int userId)

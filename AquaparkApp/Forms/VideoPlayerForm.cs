@@ -19,7 +19,7 @@ namespace AquaparkApp.Forms
         private Label _titleLabel;
         private TrackBar _progressBar;
         private Label _timeLabel;
-        private Timer _timer;
+        private System.Windows.Forms.Timer _timer;
         private bool _isPlaying = false;
         private string _videoPath;
 
@@ -39,7 +39,7 @@ namespace AquaparkApp.Forms
             this.Size = new Size(1000, 700);
             this.StartPosition = FormStartPosition.CenterParent;
             this.BackColor = Color.FromArgb(240, 240, 240);
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
             this.Font = new Font("SF Pro Display", 12F, FontStyle.Regular);
             
             this.ResumeLayout(false);
@@ -147,7 +147,7 @@ namespace AquaparkApp.Forms
             _closeButton.Click += CloseButton_Click;
 
             // Таймер для обновления прогресса
-            _timer = new Timer
+            _timer = new System.Windows.Forms.Timer
             {
                 Interval = 1000
             };

@@ -54,8 +54,9 @@ namespace AquaparkApp.Forms
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.FromArgb(248, 248, 248);
             this.Font = new Font("SF Pro Display", 12F, FontStyle.Regular);
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.WindowState = FormWindowState.Normal;
+            this.MinimumSize = new Size(1200, 800);
             
             this.ResumeLayout(false);
         }

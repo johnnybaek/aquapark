@@ -46,7 +46,7 @@ namespace AquaparkApp.Forms
             this.Size = new Size(600, 700);
             this.StartPosition = FormStartPosition.CenterParent;
             this.BackColor = Color.FromArgb(240, 240, 240);
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Font = new Font("SF Pro Display", 12F, FontStyle.Regular);
             
             this.ResumeLayout(false);

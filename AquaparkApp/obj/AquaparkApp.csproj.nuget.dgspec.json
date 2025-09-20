@@ -57,6 +57,12 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -133,11 +139,11 @@
           "dependencies": {
             "Dapper": {
               "target": "Package",
-              "version": "[2.0.123, )"
+              "version": "[2.1.35, )"
             },
             "Npgsql": {
               "target": "Package",
-              "version": "[7.0.4, )"
+              "version": "[8.0.3, )"
             }
           },
           "imports": [
@@ -289,10 +295,6 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
-            "Bunifu.UI.WinForms": {
-              "target": "Package",
-              "version": "[1.5.3, )"
-            },
             "ClosedXML": {
               "target": "Package",
               "version": "[0.102.2, )"
@@ -305,10 +307,6 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
-            "Guna.UI2": {
-              "target": "Package",
-              "version": "[2.0.0.6, )"
-            },
             "MaterialSkin.2": {
               "target": "Package",
               "version": "[2.3.1, )"
@@ -319,7 +317,7 @@
             },
             "Npgsql": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             },
             "QRCoder": {
               "target": "Package",
@@ -339,11 +337,11 @@
             },
             "System.Windows.Forms.DataVisualization": {
               "target": "Package",
-              "version": "[1.0.0-prerelease.23511.1, )"
+              "version": "[1.0.0-prerelease.20110.1, )"
             },
-            "iTextSharp": {
+            "itext7": {
               "target": "Package",
-              "version": "[5.5.13.3, )"
+              "version": "[8.0.3, )"
             }
           },
           "imports": [

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AquaparkApp.Models\AquaparkApp.Models.csproj" />
     <ProjectReference Include="..\AquaparkApp.DAL\AquaparkApp.DAL.csproj" />
   </ItemGroup>

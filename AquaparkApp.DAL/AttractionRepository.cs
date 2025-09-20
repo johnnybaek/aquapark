@@ -5,6 +5,10 @@ namespace AquaparkApp.DAL
 {
     public class AttractionRepository : BaseRepository<Attraction>
     {
+        public AttractionRepository() : base() { }
+        
+        public AttractionRepository(string connectionString) : base(connectionString) { }
+
         protected override string GetTableName() => "Attractions";
 
         public async Task<IEnumerable<Attraction>> GetActiveAttractionsAsync()

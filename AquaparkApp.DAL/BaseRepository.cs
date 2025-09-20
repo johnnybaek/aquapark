@@ -5,8 +5,24 @@ namespace AquaparkApp.DAL
 {
     public abstract class BaseRepository<T> where T : class
     {
+        private readonly string? _connectionString;
+
+        public BaseRepository()
+        {
+            _connectionString = null;
+        }
+
+        public BaseRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         protected IDbConnection GetConnection()
         {
+            if (!string.IsNullOrEmpty(_connectionString))
+            {
+                return new Npgsql.NpgsqlConnection(_connectionString);
+            }
             return DatabaseConnection.GetConnection();
         }
 
