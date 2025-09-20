@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "yZtNHSYO5og=",
+  "success": true,
+  "projectFilePath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\agust\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\agust\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\agust\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
