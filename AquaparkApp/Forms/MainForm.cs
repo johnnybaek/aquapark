@@ -87,19 +87,28 @@ namespace AquaparkApp.Forms
             var logoLabel = new Label
             {
                 Text = "🌊 Аквапарк \"Водный мир\"",
-                Font = new Font("SF Pro Display", 20F, FontStyle.Bold),
+                Font = new Font("SF Pro Text", 20F, FontStyle.Bold),
                 ForeColor = Color.White,
                 Location = new Point(30, 20),
                 AutoSize = true
             };
 
             // Кнопки авторизации
+            // Создаем панель для кнопок справа
+            var rightPanel = new Panel
+            {
+                Dock = DockStyle.Right,
+                Width = 250,
+                Height = 80
+            };
+
             _loginButton = new MacOSButton
             {
                 Text = "Войти",
                 Size = new Size(100, 35),
-                Location = new Point(1200, 20),
-                Font = new Font("SF Pro Display", 12F, FontStyle.Regular)
+                Location = new Point(10, 20),
+                Font = new Font("SF Pro Text", 12F, FontStyle.Regular),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
             };
             _loginButton.Click += LoginButton_Click;
 
@@ -107,8 +116,9 @@ namespace AquaparkApp.Forms
             {
                 Text = "Регистрация",
                 Size = new Size(120, 35),
-                Location = new Point(1320, 20),
-                Font = new Font("SF Pro Display", 12F, FontStyle.Regular)
+                Location = new Point(120, 20),
+                Font = new Font("SF Pro Text", 12F, FontStyle.Regular),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
             };
             _registerButton.Click += RegisterButton_Click;
 
@@ -116,23 +126,27 @@ namespace AquaparkApp.Forms
             {
                 Text = "Выйти",
                 Size = new Size(100, 35),
-                Location = new Point(1200, 20),
-                Font = new Font("SF Pro Display", 12F, FontStyle.Regular),
-                Visible = false
+                Location = new Point(10, 20),
+                Font = new Font("SF Pro Text", 12F, FontStyle.Regular),
+                Visible = false,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
             };
             _logoutButton.Click += LogoutButton_Click;
 
             _welcomeLabel = new Label
             {
                 Text = "Добро пожаловать!",
-                Font = new Font("SF Pro Display", 14F, FontStyle.Regular),
+                Font = new Font("SF Pro Text", 14F, FontStyle.Regular),
                 ForeColor = Color.White,
-                Location = new Point(1000, 25),
+                Location = new Point(10, 25),
                 AutoSize = true,
-                Visible = false
+                Visible = false,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
             };
 
-            _headerPanel.Controls.AddRange(new Control[] { logoLabel, _loginButton, _registerButton, _logoutButton, _welcomeLabel });
+            rightPanel.Controls.AddRange(new Control[] { _loginButton, _registerButton, _logoutButton, _welcomeLabel });
+
+            _headerPanel.Controls.AddRange(new Control[] { logoLabel, rightPanel });
             this.Controls.Add(_headerPanel);
         }
 
@@ -141,7 +155,16 @@ namespace AquaparkApp.Forms
             _sidebarPanel = new GlassPanel
             {
                 Dock = DockStyle.Left,
-                Width = 250,
+                Width = 260,
+                BackColor = Color.FromArgb(240, 240, 240)
+            };
+
+            // Создаем панель для прокрутки меню
+            var scrollPanel = new Panel
+            {
+                Dock = DockStyle.Fill,
+                AutoScroll = true,
+                Padding = new Padding(5),
                 BackColor = Color.FromArgb(240, 240, 240)
             };
 
@@ -167,22 +190,23 @@ namespace AquaparkApp.Forms
                 new { Text = "🔧 Админ-панель", Tag = "admin" }
             };
 
-            int y = 20;
+            int y = 10;
             foreach (var item in menuItems)
             {
                 var menuButton = new MacOSButton
                 {
                     Text = item.Text,
-                    Size = new Size(210, 45),
-                    Location = new Point(20, y),
-                    Font = new Font("SF Pro Display", 12F, FontStyle.Regular),
+                    Size = new Size(220, 35),
+                    Location = new Point(10, y),
+                    Font = new Font("SF Pro Text", 10F, FontStyle.Regular),
                     Tag = item.Tag
                 };
                 menuButton.Click += MenuButton_Click;
-                _sidebarPanel.Controls.Add(menuButton);
-                y += 55;
+                scrollPanel.Controls.Add(menuButton);
+                y += 40;
             }
 
+            _sidebarPanel.Controls.Add(scrollPanel);
             this.Controls.Add(_sidebarPanel);
         }
 
@@ -354,15 +378,66 @@ namespace AquaparkApp.Forms
         private void ShowHomePage()
         {
             _contentPanel.Controls.Clear();
+            
+            // Создаем панель с прокруткой для контента
+            var scrollPanel = new Panel
+            {
+                Dock = DockStyle.Fill,
+                AutoScroll = true,
+                Padding = new Padding(20, 10, 20, 20)
+            };
+
             var welcomeLabel = new Label
             {
                 Text = "🌊 Добро пожаловать в систему управления аквапарком!",
-                Font = new Font("SF Pro Display", 24F, FontStyle.Bold),
+                Font = new Font("SF Pro Text", 28F, FontStyle.Bold),
                 ForeColor = Color.FromArgb(0, 122, 255),
-                Location = new Point(50, 50),
+                Location = new Point(20, 10),
                 AutoSize = true
             };
-            _contentPanel.Controls.Add(welcomeLabel);
+
+            var descLabel = new Label
+            {
+                Text = "Комплексная система для управления всеми аспектами работы аквапарка",
+                Font = new Font("SF Pro Text", 16F, FontStyle.Regular),
+                ForeColor = Color.FromArgb(100, 100, 100),
+                Location = new Point(20, 60),
+                AutoSize = true
+            };
+
+            // Создаем панель с функциями
+            var featuresPanel = new Panel
+            {
+                Location = new Point(20, 110),
+                Size = new Size(800, 350),
+                BackColor = Color.FromArgb(248, 248, 248),
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            var featuresLabel = new Label
+            {
+                Text = "🎯 Основные возможности системы:\n\n" +
+                       "👥 Управление клиентами - регистрация, редактирование, поиск\n" +
+                       "🎫 Система билетов - продажа, валидация, статистика\n" +
+                       "🛍️ Управление услугами - каталог услуг, ценообразование\n" +
+                       "🏊 Зоны аквапарка - планировка, вместимость, контроль\n" +
+                       "👷 Персонал - сотрудники, расписание, зоны ответственности\n" +
+                       "🎒 Инвентарь - учет, аренда, статус оборудования\n" +
+                       "🚪 Посещения - контроль входа/выхода, статистика\n" +
+                       "💳 Платежи - обработка оплат, отчеты по выручке\n" +
+                       "📊 Отчеты - аналитика, экспорт в Excel\n" +
+                       "🎬 Видео - промо-материалы аквапарка\n" +
+                       "🗺️ Интерактивная карта - визуализация зон",
+                Font = new Font("SF Pro Text", 11F, FontStyle.Regular),
+                ForeColor = Color.FromArgb(80, 80, 80),
+                Location = new Point(15, 15),
+                Size = new Size(770, 320),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            featuresPanel.Controls.Add(featuresLabel);
+            scrollPanel.Controls.AddRange(new Control[] { welcomeLabel, descLabel, featuresPanel });
+            _contentPanel.Controls.Add(scrollPanel);
         }
 
         private void ShowClientsPage()
@@ -419,34 +494,67 @@ namespace AquaparkApp.Forms
         {
             _contentPanel.Controls.Clear();
             
+            // Создаем панель с прокруткой для контента
+            var scrollPanel = new Panel
+            {
+                Dock = DockStyle.Fill,
+                AutoScroll = true,
+                Padding = new Padding(20, 10, 20, 20)
+            };
+            
             var titleLabel = new Label
             {
                 Text = title,
-                Font = new Font("SF Pro Display", 24F, FontStyle.Bold),
+                Font = new Font("SF Pro Text", 28F, FontStyle.Bold),
                 ForeColor = Color.FromArgb(0, 122, 255),
-                Location = new Point(50, 50),
+                Location = new Point(20, 10),
                 AutoSize = true
             };
 
             var descLabel = new Label
             {
                 Text = description,
-                Font = new Font("SF Pro Display", 14F, FontStyle.Regular),
+                Font = new Font("SF Pro Text", 16F, FontStyle.Regular),
                 ForeColor = Color.FromArgb(100, 100, 100),
-                Location = new Point(50, 100),
+                Location = new Point(20, 60),
                 AutoSize = true
             };
 
             var statusLabel = new Label
             {
                 Text = "Функционал находится в разработке",
-                Font = new Font("SF Pro Display", 12F, FontStyle.Italic),
+                Font = new Font("SF Pro Text", 14F, FontStyle.Italic),
                 ForeColor = Color.FromArgb(150, 150, 150),
-                Location = new Point(50, 150),
+                Location = new Point(20, 110),
                 AutoSize = true
             };
 
-            _contentPanel.Controls.AddRange(new Control[] { titleLabel, descLabel, statusLabel });
+            // Добавляем информационную панель
+            var infoPanel = new Panel
+            {
+                Location = new Point(20, 160),
+                Size = new Size(800, 200),
+                BackColor = Color.FromArgb(248, 248, 248),
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            var infoLabel = new Label
+            {
+                Text = "📋 Информация о модуле:\n\n" +
+                       "• Данный раздел предназначен для управления соответствующими данными\n" +
+                       "• В будущем здесь будет реализован полный функционал CRUD операций\n" +
+                       "• Поддерживается экспорт данных в Excel\n" +
+                       "• Интегрирована система отчетов",
+                Font = new Font("SF Pro Text", 11F, FontStyle.Regular),
+                ForeColor = Color.FromArgb(80, 80, 80),
+                Location = new Point(15, 15),
+                Size = new Size(770, 170),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            infoPanel.Controls.Add(infoLabel);
+            scrollPanel.Controls.AddRange(new Control[] { titleLabel, descLabel, statusLabel, infoPanel });
+            _contentPanel.Controls.Add(scrollPanel);
         }
 
         private void ShowReportsPage()

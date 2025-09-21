@@ -26,7 +26,7 @@ namespace AquaparkApp.Controls
             FlatAppearance.BorderSize = 0;
             BackColor = Color.White;
             ForeColor = Color.White;
-            Font = new Font("SF Pro Display", 14F, FontStyle.Regular);
+            Font = new Font("SF Pro Text", 14F, FontStyle.Regular);
             Cursor = Cursors.Hand;
             Size = new Size(120, 40);
         }
@@ -63,8 +63,9 @@ namespace AquaparkApp.Controls
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.Clear(BackColor); // Очищаем фон
 
-            Rectangle rect = new Rectangle(0, 0, Width - 1, Height - 1);
+            Rectangle rect = new Rectangle(0, 0, Width, Height);
             GraphicsPath path = GetRoundedRectangle(rect, _cornerRadius);
 
             // Определяем цвета в зависимости от состояния
@@ -78,17 +79,6 @@ namespace AquaparkApp.Controls
                 rect, startColor, endColor, LinearGradientMode.Vertical))
             {
                 g.FillPath(brush, path);
-            }
-
-            // Рисуем тень
-            if (!_isPressed)
-            {
-                Rectangle shadowRect = new Rectangle(0, 2, Width - 1, Height - 1);
-                GraphicsPath shadowPath = GetRoundedRectangle(shadowRect, _cornerRadius);
-                using (SolidBrush shadowBrush = new SolidBrush(Color.FromArgb(30, 0, 0, 0)))
-                {
-                    g.FillPath(shadowBrush, shadowPath);
-                }
             }
 
             // Рисуем текст
