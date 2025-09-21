@@ -314,7 +314,7 @@ namespace AquaparkApp.Forms
 
         private async void RefreshButton_Click(object sender, EventArgs e)
         {
-            await LoadClients();
+            LoadClients();
         }
 
         protected override void OnPaint(PaintEventArgs e)

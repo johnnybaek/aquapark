@@ -6,28 +6,27 @@ namespace AquaparkApp.BLL
     public class TicketService
     {
         private readonly TicketRepository _ticketRepository;
-        private readonly AttractionRepository _attractionRepository;
+        private readonly ClientRepository _clientRepository;
 
         public TicketService()
         {
             _ticketRepository = new TicketRepository();
-            _attractionRepository = new AttractionRepository();
+            _clientRepository = new ClientRepository();
         }
 
-        public TicketService(string connectionString)
+        public async Task<IEnumerable<Ticket>> GetClientTicketsAsync(int clientId)
         {
-            _ticketRepository = new TicketRepository(connectionString);
-            _attractionRepository = new AttractionRepository(connectionString);
+            return await _ticketRepository.GetByClientIdAsync(clientId);
         }
 
-        public async Task<IEnumerable<Ticket>> GetUserTicketsAsync(int userId)
+        public async Task<IEnumerable<Ticket>> GetValidTicketsAsync()
         {
-            return await _ticketRepository.GetByUserIdAsync(userId);
+            return await _ticketRepository.GetValidTicketsAsync();
         }
 
-        public async Task<IEnumerable<Ticket>> GetTicketsByDateRangeAsync(DateTime startDate, DateTime endDate)
+        public async Task<IEnumerable<Ticket>> GetExpiredTicketsAsync()
         {
-            return await _ticketRepository.GetByDateRangeAsync(startDate, endDate);
+            return await _ticketRepository.GetExpiredTicketsAsync();
         }
 
         public async Task<Ticket?> GetTicketByIdAsync(int id)
@@ -37,17 +36,13 @@ namespace AquaparkApp.BLL
 
         public async Task<bool> CreateTicketAsync(Ticket ticket)
         {
-            // Проверяем, что аттракцион существует и активен
-            var attraction = await _attractionRepository.GetByIdAsync(ticket.AttractionId);
-            if (attraction == null || !attraction.IsActive)
+            // Проверяем, что клиент существует
+            var client = await _clientRepository.GetByIdAsync(ticket.ClientId);
+            if (client == null)
                 return false;
 
-            // Устанавливаем цену из аттракциона
-            ticket.Price = attraction.Price;
-            ticket.TotalPrice = ticket.Price * ticket.Quantity;
-            ticket.Status = "Pending";
-            ticket.CreatedAt = DateTime.UtcNow;
-            ticket.QrCode = GenerateQrCode();
+            // Устанавливаем дату покупки
+            ticket.PurchaseDate = DateTime.Now;
 
             try
             {
@@ -60,39 +55,52 @@ namespace AquaparkApp.BLL
             }
         }
 
-        public async Task<bool> ConfirmTicketAsync(int ticketId)
+        public async Task<bool> UpdateTicketAsync(Ticket ticket)
         {
-            return await _ticketRepository.UpdateStatusAsync(ticketId, "Confirmed");
+            try
+            {
+                return await _ticketRepository.UpdateAsync(ticket);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public async Task<bool> UseTicketAsync(int ticketId)
+        public async Task<bool> DeleteTicketAsync(int ticketId)
         {
-            return await _ticketRepository.MarkAsUsedAsync(ticketId);
+            try
+            {
+                return await _ticketRepository.DeleteAsync(ticketId);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public async Task<bool> CancelTicketAsync(int ticketId)
+        public async Task<decimal> GetTotalRevenueAsync(DateTime? startDate = null, DateTime? endDate = null)
         {
-            return await _ticketRepository.UpdateStatusAsync(ticketId, "Cancelled");
+            return await _ticketRepository.GetTotalRevenueAsync(startDate, endDate);
         }
 
-        public async Task<decimal> CalculateTotalPriceAsync(List<Ticket> tickets)
+        public async Task<IEnumerable<dynamic>> GetTicketTypeStatisticsAsync()
         {
-            return tickets.Sum(t => t.TotalPrice);
+            return await _ticketRepository.GetTicketTypeStatisticsAsync();
         }
 
-        public async Task<bool> ValidateTicketAsync(int ticketId, int userId)
+        public async Task<bool> ValidateTicketAsync(int ticketId)
         {
             var ticket = await _ticketRepository.GetByIdAsync(ticketId);
-            if (ticket == null || ticket.UserId != userId)
+            if (ticket == null)
                 return false;
 
-            return ticket.Status == "Confirmed" && ticket.VisitDate.Date >= DateTime.Today;
+            return ticket.IsValid;
         }
 
-        private string GenerateQrCode()
+        public async Task<IEnumerable<Ticket>> GetAllTicketsAsync()
         {
-            // Простая генерация QR кода (в реальном приложении используйте библиотеку QR кодов)
-            return $"TICKET_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid().ToString("N")[..8].ToUpper()}";
+            return await _ticketRepository.GetAllAsync();
         }
     }
 }

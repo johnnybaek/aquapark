@@ -12,7 +12,6 @@ namespace AquaparkApp.Forms
 {
     public partial class MainForm : Form
     {
-        private User? _currentUser;
         private Panel _sidebarPanel;
         private Panel _contentPanel;
         private Panel _headerPanel;
@@ -24,24 +23,20 @@ namespace AquaparkApp.Forms
         private TabControl _mainTabControl;
         
         // Сервисы
-        private AttractionService _attractionService;
-        private AuthenticationService _authService;
         private TicketService _ticketService;
+        private PaymentService _paymentService;
 
         public MainForm()
         {
             InitializeComponent();
             InitializeServices();
             SetupUI();
-            LoadAttractions();
         }
 
         private void InitializeServices()
         {
-            var connectionString = "Host=localhost;Database=aquapark_db;Username=postgres;Password=password";
-            _attractionService = new AttractionService(connectionString);
-            _authService = new AuthenticationService(connectionString);
-            _ticketService = new TicketService(connectionString);
+            _ticketService = new TicketService();
+            _paymentService = new PaymentService();
         }
 
         private void InitializeComponent()
@@ -273,48 +268,6 @@ namespace AquaparkApp.Forms
                 TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
 
-        private async void LoadAttractions()
-        {
-            try
-            {
-                var attractions = await _attractionService.GetAllAttractionsAsync();
-                
-                _attractionsPanel.Controls.Clear();
-                
-                foreach (var attraction in attractions.Where(a => a.IsActive))
-                {
-                    var card = new AttractionCard
-                    {
-                        Attraction = attraction
-                    };
-                    card.BookClicked += AttractionCard_BookClicked;
-                    _attractionsPanel.Controls.Add(card);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка загрузки аттракционов: {ex.Message}", "Ошибка", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void AttractionCard_BookClicked(object sender, Attraction attraction)
-        {
-            if (_currentUser == null)
-            {
-                MessageBox.Show("Для бронирования необходимо войти в систему.", "Требуется авторизация", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            // Открываем форму бронирования
-            var bookingForm = new BookingForm(attraction, _currentUser, _ticketService);
-            if (bookingForm.ShowDialog() == DialogResult.OK)
-            {
-                MessageBox.Show("Билет успешно забронирован!", "Успех", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
 
         private void MenuButton_Click(object sender, EventArgs e)
         {
@@ -369,75 +322,32 @@ namespace AquaparkApp.Forms
                     ShowSettingsPage();
                     break;
                 case "profile":
-                    if (_currentUser != null)
-                    {
-                        var profileForm = new ProfileForm(_currentUser);
-                        profileForm.ShowDialog();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Для просмотра профиля необходимо войти в систему.", 
-                            "Требуется авторизация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    ShowPlaceholderPage("👤 Профиль", "Управление профилем пользователя");
                     break;
                 case "admin":
-                    if (_currentUser != null && _currentUser.IsAdmin)
-                    {
-                        var adminForm = new AdminPanelForm(_currentUser);
-                        adminForm.ShowDialog();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Доступ к админ-панели ограничен.", 
-                            "Недостаточно прав", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    ShowPlaceholderPage("🔧 Админ-панель", "Административные функции");
                     break;
             }
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            var loginForm = new LoginForm(_authService);
-            if (loginForm.ShowDialog() == DialogResult.OK)
-            {
-                _currentUser = loginForm.CurrentUser;
-                UpdateUserInterface();
-            }
+            ShowPlaceholderPage("🔐 Вход", "Функция входа в систему");
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            var registerForm = new RegisterForm(_authService);
-            if (registerForm.ShowDialog() == DialogResult.OK)
-            {
-                _currentUser = registerForm.CurrentUser;
-                UpdateUserInterface();
-            }
+            ShowPlaceholderPage("📝 Регистрация", "Функция регистрации нового пользователя");
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
         {
-            _currentUser = null;
-            UpdateUserInterface();
+            ShowPlaceholderPage("🚪 Выход", "Выход из системы");
         }
 
         private void UpdateUserInterface()
         {
-            if (_currentUser != null)
-            {
-                _welcomeLabel.Text = $"Добро пожаловать, {_currentUser.FirstName}!";
-                _welcomeLabel.Visible = true;
-                _loginButton.Visible = false;
-                _registerButton.Visible = false;
-                _logoutButton.Visible = true;
-            }
-            else
-            {
-                _welcomeLabel.Visible = false;
-                _loginButton.Visible = true;
-                _registerButton.Visible = true;
-                _logoutButton.Visible = false;
-            }
+            _welcomeLabel.Text = "Добро пожаловать в систему управления аквапарком!";
         }
 
         // Методы для отображения различных страниц
@@ -457,102 +367,86 @@ namespace AquaparkApp.Forms
 
         private void ShowClientsPage()
         {
-            _contentPanel.Controls.Clear();
-            var clientsForm = new ClientsManagementForm();
-            clientsForm.TopLevel = false;
-            clientsForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(clientsForm);
-            clientsForm.Show();
+            ShowPlaceholderPage("👥 Клиенты", "Управление клиентами аквапарка");
         }
 
         private void ShowTicketsPage()
         {
-            _contentPanel.Controls.Clear();
-            var ticketsForm = new TicketsManagementForm();
-            ticketsForm.TopLevel = false;
-            ticketsForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(ticketsForm);
-            ticketsForm.Show();
+            ShowPlaceholderPage("🎫 Билеты", "Управление билетами и бронированием");
         }
 
         private void ShowServicesPage()
         {
-            _contentPanel.Controls.Clear();
-            var servicesForm = new ServicesManagementForm();
-            servicesForm.TopLevel = false;
-            servicesForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(servicesForm);
-            servicesForm.Show();
+            ShowPlaceholderPage("🛍️ Услуги", "Управление услугами аквапарка");
         }
 
         private void ShowZonesPage()
         {
-            _contentPanel.Controls.Clear();
-            var zonesForm = new ZonesManagementForm();
-            zonesForm.TopLevel = false;
-            zonesForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(zonesForm);
-            zonesForm.Show();
+            ShowPlaceholderPage("🏊 Зоны", "Управление зонами аквапарка");
         }
 
         private void ShowEmployeesPage()
         {
-            _contentPanel.Controls.Clear();
-            var employeesForm = new EmployeesManagementForm();
-            employeesForm.TopLevel = false;
-            employeesForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(employeesForm);
-            employeesForm.Show();
+            ShowPlaceholderPage("👷 Сотрудники", "Управление персоналом");
         }
 
         private void ShowSchedulePage()
         {
-            _contentPanel.Controls.Clear();
-            var scheduleForm = new ScheduleManagementForm();
-            scheduleForm.TopLevel = false;
-            scheduleForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(scheduleForm);
-            scheduleForm.Show();
+            ShowPlaceholderPage("📅 Расписание", "Управление рабочим расписанием");
         }
 
         private void ShowInventoryPage()
         {
-            _contentPanel.Controls.Clear();
-            var inventoryForm = new InventoryManagementForm();
-            inventoryForm.TopLevel = false;
-            inventoryForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(inventoryForm);
-            inventoryForm.Show();
+            ShowPlaceholderPage("🎒 Инвентарь", "Управление инвентарем");
         }
 
         private void ShowRentalsPage()
         {
-            _contentPanel.Controls.Clear();
-            var rentalsForm = new RentalsManagementForm();
-            rentalsForm.TopLevel = false;
-            rentalsForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(rentalsForm);
-            rentalsForm.Show();
+            ShowPlaceholderPage("🏃 Аренда", "Управление арендой инвентаря");
         }
 
         private void ShowVisitsPage()
         {
-            _contentPanel.Controls.Clear();
-            var visitsForm = new VisitsManagementForm();
-            visitsForm.TopLevel = false;
-            visitsForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(visitsForm);
-            visitsForm.Show();
+            ShowPlaceholderPage("🚪 Посещения", "Управление посещениями клиентов");
         }
 
         private void ShowPaymentsPage()
         {
+            ShowPlaceholderPage("💳 Оплаты", "Управление платежами");
+        }
+
+        private void ShowPlaceholderPage(string title, string description)
+        {
             _contentPanel.Controls.Clear();
-            var paymentsForm = new PaymentsManagementForm();
-            paymentsForm.TopLevel = false;
-            paymentsForm.Dock = DockStyle.Fill;
-            _contentPanel.Controls.Add(paymentsForm);
-            paymentsForm.Show();
+            
+            var titleLabel = new Label
+            {
+                Text = title,
+                Font = new Font("SF Pro Display", 24F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(0, 122, 255),
+                Location = new Point(50, 50),
+                AutoSize = true
+            };
+
+            var descLabel = new Label
+            {
+                Text = description,
+                Font = new Font("SF Pro Display", 14F, FontStyle.Regular),
+                ForeColor = Color.FromArgb(100, 100, 100),
+                Location = new Point(50, 100),
+                AutoSize = true
+            };
+
+            var statusLabel = new Label
+            {
+                Text = "Функционал находится в разработке",
+                Font = new Font("SF Pro Display", 12F, FontStyle.Italic),
+                ForeColor = Color.FromArgb(150, 150, 150),
+                Location = new Point(50, 150),
+                AutoSize = true
+            };
+
+            _contentPanel.Controls.AddRange(new Control[] { titleLabel, descLabel, statusLabel });
         }
 
         private void ShowReportsPage()

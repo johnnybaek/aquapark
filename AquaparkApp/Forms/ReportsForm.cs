@@ -489,7 +489,7 @@ namespace AquaparkApp.Forms
                 Клиент = c.FullName,
                 Телефон = c.Phone,
                 Email = c.Email ?? "Не указан",
-                Общие_траты = c.TotalSpent.ToString("C")
+                Дата_регистрации = c.RegistrationDate.ToString("dd.MM.yyyy")
             }).ToList();
 
             _reportDataGrid.DataSource = reportData;
