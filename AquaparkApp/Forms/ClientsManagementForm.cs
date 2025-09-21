@@ -32,21 +32,6 @@ namespace AquaparkApp.Forms
             LoadClients();
         }
 
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            
-            // Настройки формы
-            this.Text = "👥 Управление клиентами";
-            this.Size = new Size(1200, 800);
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.BackColor = Color.FromArgb(248, 248, 248);
-            this.Font = new Font("SF Pro Display", 12F, FontStyle.Regular);
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.MinimumSize = new Size(1000, 700);
-            
-            this.ResumeLayout(false);
-        }
 
         private void InitializeRepository()
         {

@@ -35,21 +35,6 @@ namespace AquaparkApp.Forms
             DrawMap();
         }
 
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            
-            // Настройки формы
-            this.Text = "🗺️ Интерактивная карта аквапарка";
-            this.Size = new Size(1400, 900);
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.BackColor = Color.FromArgb(248, 248, 248);
-            this.Font = new Font("SF Pro Display", 12F, FontStyle.Regular);
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.MinimumSize = new Size(1200, 800);
-            
-            this.ResumeLayout(false);
-        }
 
         private void InitializeRepositories()
         {

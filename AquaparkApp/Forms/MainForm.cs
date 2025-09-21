@@ -12,16 +12,6 @@ namespace AquaparkApp.Forms
 {
     public partial class MainForm : Form
     {
-        private Panel _sidebarPanel;
-        private Panel _contentPanel;
-        private Panel _headerPanel;
-        private Label _welcomeLabel;
-        private Button _loginButton;
-        private Button _registerButton;
-        private Button _logoutButton;
-        private FlowLayoutPanel _attractionsPanel;
-        private TabControl _mainTabControl;
-        
         // Сервисы
         private TicketService _ticketService;
         private PaymentService _paymentService;
@@ -39,50 +29,27 @@ namespace AquaparkApp.Forms
             _paymentService = new PaymentService();
         }
 
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            
-            // Настройки формы
-            this.Text = "Аквапарк \"Водный мир\" - Система управления";
-            this.Size = new Size(1400, 900);
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.FromArgb(248, 248, 248);
-            this.Font = new Font("SF Pro Display", 12F, FontStyle.Regular);
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.WindowState = FormWindowState.Normal;
-            this.MinimumSize = new Size(1200, 800);
-            
-            this.ResumeLayout(false);
-        }
 
         private void SetupUI()
         {
-            // Создаем панель заголовка
-            CreateHeaderPanel();
+            // Настраиваем панель заголовка
+            SetupHeaderPanel();
             
-            // Создаем боковую панель
-            CreateSidebarPanel();
+            // Настраиваем боковую панель
+            SetupSidebarPanel();
             
-            // Создаем основную панель контента
-            CreateContentPanel();
+            // Настраиваем основную панель контента
+            SetupContentPanel();
             
-            // Создаем панель аттракционов
-            CreateAttractionsPanel();
+            // Настраиваем панель аттракционов
+            SetupAttractionsPanel();
             
-            // Создаем главные вкладки
-            CreateMainTabs();
+            // Настраиваем главные вкладки
+            SetupMainTabs();
         }
 
-        private void CreateHeaderPanel()
+        private void SetupHeaderPanel()
         {
-            _headerPanel = new Panel
-            {
-                Dock = DockStyle.Top,
-                Height = 80,
-                BackColor = Color.FromArgb(0, 122, 255)
-            };
-
             // Логотип
             var logoLabel = new Label
             {
@@ -93,72 +60,16 @@ namespace AquaparkApp.Forms
                 AutoSize = true
             };
 
-            // Кнопки авторизации
-            // Создаем панель для кнопок справа
-            var rightPanel = new Panel
-            {
-                Dock = DockStyle.Right,
-                Width = 250,
-                Height = 80
-            };
+            _headerPanel.Controls.Add(logoLabel);
 
-            _loginButton = new MacOSButton
-            {
-                Text = "Войти",
-                Size = new Size(100, 35),
-                Location = new Point(10, 20),
-                Font = new Font("SF Pro Text", 12F, FontStyle.Regular),
-                Anchor = AnchorStyles.Top | AnchorStyles.Right
-            };
+            // Настраиваем обработчики событий
             _loginButton.Click += LoginButton_Click;
-
-            _registerButton = new MacOSButton
-            {
-                Text = "Регистрация",
-                Size = new Size(120, 35),
-                Location = new Point(120, 20),
-                Font = new Font("SF Pro Text", 12F, FontStyle.Regular),
-                Anchor = AnchorStyles.Top | AnchorStyles.Right
-            };
             _registerButton.Click += RegisterButton_Click;
-
-            _logoutButton = new MacOSButton
-            {
-                Text = "Выйти",
-                Size = new Size(100, 35),
-                Location = new Point(10, 20),
-                Font = new Font("SF Pro Text", 12F, FontStyle.Regular),
-                Visible = false,
-                Anchor = AnchorStyles.Top | AnchorStyles.Right
-            };
             _logoutButton.Click += LogoutButton_Click;
-
-            _welcomeLabel = new Label
-            {
-                Text = "Добро пожаловать!",
-                Font = new Font("SF Pro Text", 14F, FontStyle.Regular),
-                ForeColor = Color.White,
-                Location = new Point(10, 25),
-                AutoSize = true,
-                Visible = false,
-                Anchor = AnchorStyles.Top | AnchorStyles.Right
-            };
-
-            rightPanel.Controls.AddRange(new Control[] { _loginButton, _registerButton, _logoutButton, _welcomeLabel });
-
-            _headerPanel.Controls.AddRange(new Control[] { logoLabel, rightPanel });
-            this.Controls.Add(_headerPanel);
         }
 
-        private void CreateSidebarPanel()
+        private void SetupSidebarPanel()
         {
-            _sidebarPanel = new GlassPanel
-            {
-                Dock = DockStyle.Left,
-                Width = 260,
-                BackColor = Color.FromArgb(240, 240, 240)
-            };
-
             // Создаем панель для прокрутки меню
             var scrollPanel = new Panel
             {
@@ -207,48 +118,21 @@ namespace AquaparkApp.Forms
             }
 
             _sidebarPanel.Controls.Add(scrollPanel);
-            this.Controls.Add(_sidebarPanel);
         }
 
-        private void CreateContentPanel()
+        private void SetupContentPanel()
         {
-            _contentPanel = new Panel
-            {
-                Dock = DockStyle.Fill,
-                BackColor = Color.FromArgb(248, 248, 248),
-                Padding = new Padding(20)
-            };
-
-            this.Controls.Add(_contentPanel);
+            // Панель контента уже настроена в Designer
         }
 
-        private void CreateAttractionsPanel()
+        private void SetupAttractionsPanel()
         {
-            _attractionsPanel = new FlowLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                AutoScroll = true,
-                Padding = new Padding(10),
-                FlowDirection = FlowDirection.LeftToRight,
-                WrapContents = true
-            };
-
-            _contentPanel.Controls.Add(_attractionsPanel);
+            // Панель аттракционов уже настроена в Designer
         }
 
-        private void CreateMainTabs()
+        private void SetupMainTabs()
         {
-            _mainTabControl = new TabControl
-            {
-                Dock = DockStyle.Fill,
-                Font = new Font("SF Pro Display", 12F, FontStyle.Regular),
-                Appearance = TabAppearance.FlatButtons,
-                ItemSize = new Size(120, 40),
-                SizeMode = TabSizeMode.Fixed
-            };
-
             // Стилизация вкладок
-            _mainTabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
             _mainTabControl.DrawItem += TabControl_DrawItem;
 
             // Добавляем вкладки
@@ -259,8 +143,6 @@ namespace AquaparkApp.Forms
             var settingsTab = new TabPage("⚙️ Настройки");
 
             _mainTabControl.TabPages.AddRange(new TabPage[] { homeTab, attractionsTab, ticketsTab, reportsTab, settingsTab });
-
-            _contentPanel.Controls.Add(_mainTabControl);
         }
 
         private void TabControl_DrawItem(object sender, DrawItemEventArgs e)
