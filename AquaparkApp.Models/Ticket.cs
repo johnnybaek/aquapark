@@ -1,26 +1,40 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AquaparkApp.Models
 {
+    /// <summary>
+    /// Модель билета
+    /// </summary>
     public class Ticket
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public int AttractionId { get; set; }
-        public DateTime VisitDate { get; set; }
-        public TimeSpan VisitTime { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
-        public decimal TotalPrice { get; set; }
-        public string Status { get; set; } = "Pending"; // Pending, Confirmed, Used, Cancelled
-        public DateTime CreatedAt { get; set; }
-        public DateTime? ConfirmedAt { get; set; }
-        public DateTime? UsedAt { get; set; }
-        public string QrCode { get; set; } = string.Empty;
-        public string Notes { get; set; } = string.Empty;
+        [Key]
+        public int TicketId { get; set; }
         
-        // Navigation properties
-        public User? User { get; set; }
-        public Attraction? Attraction { get; set; }
+        [Required]
+        public int ClientId { get; set; }
+        
+        [Required(ErrorMessage = "Тип билета обязателен")]
+        [StringLength(50, ErrorMessage = "Тип билета не должен превышать 50 символов")]
+        public string TicketType { get; set; } = string.Empty;
+        
+        [Required(ErrorMessage = "Цена обязательна")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Цена должна быть больше 0")]
+        public decimal Price { get; set; }
+        
+        public DateTime PurchaseDate { get; set; } = DateTime.Now;
+        
+        [Required(ErrorMessage = "Дата действия обязательна")]
+        public DateTime ValidUntil { get; set; }
+        
+        // Навигационные свойства
+        public virtual Client Client { get; set; } = null!;
+        public virtual ICollection<Visit> Visits { get; set; } = new List<Visit>();
+        public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+        
+        // Вычисляемые свойства
+        public bool IsValid => DateTime.Now <= ValidUntil;
+        public string Status => IsValid ? "Действителен" : "Истек";
+        public int DaysUntilExpiry => (ValidUntil - DateTime.Now).Days;
     }
 }

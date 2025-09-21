@@ -5,7 +5,7 @@ namespace AquaparkApp.DAL
 {
     public class DatabaseConnection
     {
-        private static readonly string ConnectionString = "Host=localhost;Database=aquapark_db;Username=postgres;Password=postgres;Port=5432;";
+        private static readonly string ConnectionString = "Host=localhost;Database=aquapark_db;Username=postgres;Password=123;Port=5432;";
 
         public static IDbConnection GetConnection()
         {

@@ -150,13 +150,23 @@ namespace AquaparkApp.Forms
                 BackColor = Color.FromArgb(240, 240, 240)
             };
 
-            // Меню навигации
+            // Меню навигации - названия соответствуют таблицам БД
             var menuItems = new[]
             {
                 new { Text = "🏠 Главная", Tag = "home" },
-                new { Text = "🎢 Аттракционы", Tag = "attractions" },
-                new { Text = "🎫 Мои билеты", Tag = "tickets" },
+                new { Text = "👥 Клиенты", Tag = "clients" },
+                new { Text = "🎫 Билеты", Tag = "tickets" },
+                new { Text = "🛍️ Услуги", Tag = "services" },
+                new { Text = "🏊 Зоны", Tag = "zones" },
+                new { Text = "👷 Сотрудники", Tag = "employees" },
+                new { Text = "📅 Расписание", Tag = "schedule" },
+                new { Text = "🎒 Инвентарь", Tag = "inventory" },
+                new { Text = "🏃 Аренда", Tag = "rentals" },
+                new { Text = "🚪 Посещения", Tag = "visits" },
+                new { Text = "💳 Оплаты", Tag = "payments" },
                 new { Text = "📊 Отчеты", Tag = "reports" },
+                new { Text = "🎬 Видео", Tag = "video" },
+                new { Text = "🗺️ Карта", Tag = "map" },
                 new { Text = "⚙️ Настройки", Tag = "settings" },
                 new { Text = "👤 Профиль", Tag = "profile" },
                 new { Text = "🔧 Админ-панель", Tag = "admin" }
@@ -314,19 +324,49 @@ namespace AquaparkApp.Forms
             switch (tag)
             {
                 case "home":
-                    _mainTabControl.SelectedIndex = 0;
+                    ShowHomePage();
                     break;
-                case "attractions":
-                    _mainTabControl.SelectedIndex = 1;
+                case "clients":
+                    ShowClientsPage();
                     break;
                 case "tickets":
-                    _mainTabControl.SelectedIndex = 2;
+                    ShowTicketsPage();
+                    break;
+                case "services":
+                    ShowServicesPage();
+                    break;
+                case "zones":
+                    ShowZonesPage();
+                    break;
+                case "employees":
+                    ShowEmployeesPage();
+                    break;
+                case "schedule":
+                    ShowSchedulePage();
+                    break;
+                case "inventory":
+                    ShowInventoryPage();
+                    break;
+                case "rentals":
+                    ShowRentalsPage();
+                    break;
+                case "visits":
+                    ShowVisitsPage();
+                    break;
+                case "payments":
+                    ShowPaymentsPage();
                     break;
                 case "reports":
-                    _mainTabControl.SelectedIndex = 3;
+                    ShowReportsPage();
+                    break;
+                case "video":
+                    ShowVideoPlayer();
+                    break;
+                case "map":
+                    ShowInteractiveMap();
                     break;
                 case "settings":
-                    _mainTabControl.SelectedIndex = 4;
+                    ShowSettingsPage();
                     break;
                 case "profile":
                     if (_currentUser != null)
@@ -398,6 +438,161 @@ namespace AquaparkApp.Forms
                 _registerButton.Visible = true;
                 _logoutButton.Visible = false;
             }
+        }
+
+        // Методы для отображения различных страниц
+        private void ShowHomePage()
+        {
+            _contentPanel.Controls.Clear();
+            var welcomeLabel = new Label
+            {
+                Text = "🌊 Добро пожаловать в систему управления аквапарком!",
+                Font = new Font("SF Pro Display", 24F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(0, 122, 255),
+                Location = new Point(50, 50),
+                AutoSize = true
+            };
+            _contentPanel.Controls.Add(welcomeLabel);
+        }
+
+        private void ShowClientsPage()
+        {
+            _contentPanel.Controls.Clear();
+            var clientsForm = new ClientsManagementForm();
+            clientsForm.TopLevel = false;
+            clientsForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(clientsForm);
+            clientsForm.Show();
+        }
+
+        private void ShowTicketsPage()
+        {
+            _contentPanel.Controls.Clear();
+            var ticketsForm = new TicketsManagementForm();
+            ticketsForm.TopLevel = false;
+            ticketsForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(ticketsForm);
+            ticketsForm.Show();
+        }
+
+        private void ShowServicesPage()
+        {
+            _contentPanel.Controls.Clear();
+            var servicesForm = new ServicesManagementForm();
+            servicesForm.TopLevel = false;
+            servicesForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(servicesForm);
+            servicesForm.Show();
+        }
+
+        private void ShowZonesPage()
+        {
+            _contentPanel.Controls.Clear();
+            var zonesForm = new ZonesManagementForm();
+            zonesForm.TopLevel = false;
+            zonesForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(zonesForm);
+            zonesForm.Show();
+        }
+
+        private void ShowEmployeesPage()
+        {
+            _contentPanel.Controls.Clear();
+            var employeesForm = new EmployeesManagementForm();
+            employeesForm.TopLevel = false;
+            employeesForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(employeesForm);
+            employeesForm.Show();
+        }
+
+        private void ShowSchedulePage()
+        {
+            _contentPanel.Controls.Clear();
+            var scheduleForm = new ScheduleManagementForm();
+            scheduleForm.TopLevel = false;
+            scheduleForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(scheduleForm);
+            scheduleForm.Show();
+        }
+
+        private void ShowInventoryPage()
+        {
+            _contentPanel.Controls.Clear();
+            var inventoryForm = new InventoryManagementForm();
+            inventoryForm.TopLevel = false;
+            inventoryForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(inventoryForm);
+            inventoryForm.Show();
+        }
+
+        private void ShowRentalsPage()
+        {
+            _contentPanel.Controls.Clear();
+            var rentalsForm = new RentalsManagementForm();
+            rentalsForm.TopLevel = false;
+            rentalsForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(rentalsForm);
+            rentalsForm.Show();
+        }
+
+        private void ShowVisitsPage()
+        {
+            _contentPanel.Controls.Clear();
+            var visitsForm = new VisitsManagementForm();
+            visitsForm.TopLevel = false;
+            visitsForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(visitsForm);
+            visitsForm.Show();
+        }
+
+        private void ShowPaymentsPage()
+        {
+            _contentPanel.Controls.Clear();
+            var paymentsForm = new PaymentsManagementForm();
+            paymentsForm.TopLevel = false;
+            paymentsForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(paymentsForm);
+            paymentsForm.Show();
+        }
+
+        private void ShowReportsPage()
+        {
+            _contentPanel.Controls.Clear();
+            var reportsForm = new ReportsForm();
+            reportsForm.TopLevel = false;
+            reportsForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(reportsForm);
+            reportsForm.Show();
+        }
+
+        private void ShowVideoPlayer()
+        {
+            var videoForm = new VideoPlayerForm();
+            videoForm.ShowDialog();
+        }
+
+        private void ShowInteractiveMap()
+        {
+            _contentPanel.Controls.Clear();
+            var mapForm = new InteractiveMapForm();
+            mapForm.TopLevel = false;
+            mapForm.Dock = DockStyle.Fill;
+            _contentPanel.Controls.Add(mapForm);
+            mapForm.Show();
+        }
+
+        private void ShowSettingsPage()
+        {
+            _contentPanel.Controls.Clear();
+            var settingsLabel = new Label
+            {
+                Text = "⚙️ Настройки системы",
+                Font = new Font("SF Pro Display", 18F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(0, 122, 255),
+                Location = new Point(50, 50),
+                AutoSize = true
+            };
+            _contentPanel.Controls.Add(settingsLabel);
         }
 
         protected override void OnPaint(PaintEventArgs e)
