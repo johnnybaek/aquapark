@@ -544,7 +544,7 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.20": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -2897,7 +2897,7 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "Microsoft.NET.ILLink.Tasks/8.0.20": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -5656,10 +5656,10 @@
         "microsoft.io.recyclablememorystream.nuspec"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/8.0.13": {
-      "sha512": "R19ZTaRiQAK+xo9ZwaHbF/1vb1wwR1Wn5+sqp9v8+CDjbdS8R6qftKdw0VSXWKm7VAMi7P+NCU4zxDzhEWcAwQ==",
+    "Microsoft.NET.ILLink.Tasks/8.0.20": {
+      "sha512": "Rhcto2AjGvTO62+/VTmBpumBOmqIGp7nYEbTbmEXkCq4yPGxV8whju3/HsIA/bKyo2+DggaYk5+/8sxb1AbPTw==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/8.0.13",
+      "path": "microsoft.net.illink.tasks/8.0.20",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -5673,7 +5673,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.8.0.13.nupkg.sha512",
+        "microsoft.net.illink.tasks.8.0.20.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -10714,7 +10714,7 @@
       "Dapper >= 2.1.35",
       "EPPlus >= 7.0.0",
       "MaterialSkin.2 >= 2.3.1",
-      "Microsoft.NET.ILLink.Tasks >= 8.0.13",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.20",
       "Newtonsoft.Json >= 13.0.3",
       "Npgsql >= 8.0.3",
       "QRCoder >= 1.4.3",
@@ -10726,23 +10726,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\agust\\.nuget\\packages\\": {},
+    "C:\\Users\\Степа\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp\\AquaparkApp.csproj",
+      "projectUniqueName": "D:\\аис_аквапарк\\aquapark\\AquaparkApp\\AquaparkApp.csproj",
       "projectName": "AquaparkApp",
-      "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp\\AquaparkApp.csproj",
-      "packagesPath": "C:\\Users\\agust\\.nuget\\packages\\",
-      "outputPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp\\obj\\",
+      "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp\\AquaparkApp.csproj",
+      "packagesPath": "C:\\Users\\Степа\\.nuget\\packages\\",
+      "outputPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\agust\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Степа\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -10751,21 +10751,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj": {
-              "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj"
+            "D:\\аис_аквапарк\\aquapark\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj": {
+              "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj"
             },
-            "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj": {
-              "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj"
+            "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj": {
+              "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj"
             },
-            "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
-              "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj"
+            "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
+              "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj"
             }
           }
         }
@@ -10780,7 +10779,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -10805,7 +10804,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.13, )",
+            "version": "[8.0.20, )",
             "autoReferenced": true
           },
           "Newtonsoft.Json": {
@@ -10855,19 +10854,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-            "version": "[8.0.13, 8.0.13]"
+            "version": "[8.0.20, 8.0.20]"
           },
           {
             "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-            "version": "[8.0.13, 8.0.13]"
+            "version": "[8.0.20, 8.0.20]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.win-x64",
-            "version": "[8.0.13, 8.0.13]"
+            "version": "[8.0.20, 8.0.20]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-            "version": "[8.0.13, 8.0.13]"
+            "version": "[8.0.20, 8.0.20]"
           }
         ],
         "frameworkReferences": {
@@ -10878,7 +10877,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

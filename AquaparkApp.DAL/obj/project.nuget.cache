@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "MLzjcRir1gk=",
+  "dgSpecHash": "w1cMrw51SnM=",
   "success": true,
-  "projectFilePath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj",
+  "projectFilePath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\agust\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
-    "C:\\Users\\agust\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\agust\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\agust\\.nuget\\packages\\npgsql\\8.0.3\\npgsql.8.0.3.nupkg.sha512"
+    "C:\\Users\\Степа\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
+    "C:\\Users\\Степа\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Степа\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Степа\\.nuget\\packages\\npgsql\\8.0.3\\npgsql.8.0.3.nupkg.sha512"
   ],
   "logs": []
 }

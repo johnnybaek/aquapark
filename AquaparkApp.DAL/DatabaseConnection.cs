@@ -1,11 +1,18 @@
 using Npgsql;
 using System.Data;
+using Dapper;
 
 namespace AquaparkApp.DAL
 {
     public class DatabaseConnection
     {
         private static readonly string ConnectionString = "Host=localhost;Database=aquapark_db;Username=postgres;Password=123;Port=5432;";
+
+        static DatabaseConnection()
+        {
+            // Включаем сопоставление snake_case колонок (client_id) с PascalCase свойствами (ClientId)
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
+        }
 
         public static IDbConnection GetConnection()
         {

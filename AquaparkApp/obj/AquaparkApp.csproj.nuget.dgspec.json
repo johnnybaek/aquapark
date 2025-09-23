@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp\\AquaparkApp.csproj": {}
+    "D:\\аис_аквапарк\\aquapark\\AquaparkApp\\AquaparkApp.csproj": {}
   },
   "projects": {
-    "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj": {
+    "D:\\аис_аквапарк\\aquapark\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj",
+        "projectUniqueName": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj",
         "projectName": "AquaparkApp.BLL",
-        "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj",
-        "packagesPath": "C:\\Users\\agust\\.nuget\\packages\\",
-        "outputPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.BLL\\obj\\",
+        "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj",
+        "packagesPath": "C:\\Users\\Степа\\.nuget\\packages\\",
+        "outputPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\agust\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Степа\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,18 +26,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj": {
-                "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj"
+              "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj": {
+                "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj"
               },
-              "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
-                "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj"
+              "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
+                "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj"
               }
             }
           }
@@ -52,7 +51,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -82,24 +81,24 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj": {
+    "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj",
+        "projectUniqueName": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj",
         "projectName": "AquaparkApp.DAL",
-        "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj",
-        "packagesPath": "C:\\Users\\agust\\.nuget\\packages\\",
-        "outputPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\obj\\",
+        "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj",
+        "packagesPath": "C:\\Users\\Степа\\.nuget\\packages\\",
+        "outputPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\agust\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Степа\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -108,15 +107,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
-                "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj"
+              "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
+                "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj"
               }
             }
           }
@@ -131,7 +129,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -165,24 +163,24 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
+    "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj",
+        "projectUniqueName": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj",
         "projectName": "AquaparkApp.Models",
-        "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj",
-        "packagesPath": "C:\\Users\\agust\\.nuget\\packages\\",
-        "outputPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\obj\\",
+        "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj",
+        "packagesPath": "C:\\Users\\Степа\\.nuget\\packages\\",
+        "outputPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\agust\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Степа\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -191,7 +189,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -210,7 +207,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -234,24 +231,24 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp\\AquaparkApp.csproj": {
+    "D:\\аис_аквапарк\\aquapark\\AquaparkApp\\AquaparkApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp\\AquaparkApp.csproj",
+        "projectUniqueName": "D:\\аис_аквапарк\\aquapark\\AquaparkApp\\AquaparkApp.csproj",
         "projectName": "AquaparkApp",
-        "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp\\AquaparkApp.csproj",
-        "packagesPath": "C:\\Users\\agust\\.nuget\\packages\\",
-        "outputPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp\\obj\\",
+        "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp\\AquaparkApp.csproj",
+        "packagesPath": "C:\\Users\\Степа\\.nuget\\packages\\",
+        "outputPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\agust\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Степа\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -260,21 +257,20 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj": {
-                "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj"
+              "D:\\аис_аквапарк\\aquapark\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj": {
+                "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.BLL\\AquaparkApp.BLL.csproj"
               },
-              "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj": {
-                "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj"
+              "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj": {
+                "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.DAL\\AquaparkApp.DAL.csproj"
               },
-              "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
-                "projectPath": "D:\\aquapark\\aquapark\\aquapark-1\\AquaparkApp.Models\\AquaparkApp.Models.csproj"
+              "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj": {
+                "projectPath": "D:\\аис_аквапарк\\aquapark\\AquaparkApp.Models\\AquaparkApp.Models.csproj"
               }
             }
           }
@@ -289,7 +285,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -314,7 +310,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.13, )",
+              "version": "[8.0.20, )",
               "autoReferenced": true
             },
             "Newtonsoft.Json": {
@@ -364,19 +360,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[8.0.13, 8.0.13]"
+              "version": "[8.0.20, 8.0.20]"
             },
             {
               "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[8.0.13, 8.0.13]"
+              "version": "[8.0.20, 8.0.20]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[8.0.13, 8.0.13]"
+              "version": "[8.0.20, 8.0.20]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[8.0.13, 8.0.13]"
+              "version": "[8.0.20, 8.0.20]"
             }
           ],
           "frameworkReferences": {
@@ -387,7 +383,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
