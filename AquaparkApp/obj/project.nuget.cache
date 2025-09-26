@@ -161,10 +161,10 @@
     "C:\\Users\\agust\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\agust\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\agust\\.nuget\\packages\\xlparser\\1.5.2\\xlparser.1.5.2.nupkg.sha512",
-    "C:\\Users\\agust\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.13\\microsoft.netcore.app.runtime.win-x64.8.0.13.nupkg.sha512",
-    "C:\\Users\\agust\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.13\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.13.nupkg.sha512",
+    "C:\\Users\\agust\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\8.0.13\\microsoft.netcore.app.crossgen2.win-x64.8.0.13.nupkg.sha512",
     "C:\\Users\\agust\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.13\\microsoft.aspnetcore.app.runtime.win-x64.8.0.13.nupkg.sha512",
-    "C:\\Users\\agust\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\8.0.13\\microsoft.netcore.app.crossgen2.win-x64.8.0.13.nupkg.sha512"
+    "C:\\Users\\agust\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.13\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.13.nupkg.sha512",
+    "C:\\Users\\agust\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.13\\microsoft.netcore.app.runtime.win-x64.8.0.13.nupkg.sha512"
   ],
   "logs": []
 }

@@ -61,6 +61,7 @@ namespace AquaparkApp.Forms
             this._sidebarPanel.Name = "_sidebarPanel";
             this._sidebarPanel.Size = new System.Drawing.Size(260, 820);
             this._sidebarPanel.TabIndex = 1;
+            this._sidebarPanel.MinimumSize = new System.Drawing.Size(220, 0);
             // 
             // _contentPanel
             // 
@@ -87,7 +88,7 @@ namespace AquaparkApp.Forms
             // 
             this._loginButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._loginButton.Font = new System.Drawing.Font("SF Pro Text", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._loginButton.Location = new System.Drawing.Point(1200, 20);
+            this._loginButton.Location = new System.Drawing.Point(1120, 20);
             this._loginButton.Name = "_loginButton";
             this._loginButton.Size = new System.Drawing.Size(100, 35);
             this._loginButton.TabIndex = 1;
@@ -98,7 +99,7 @@ namespace AquaparkApp.Forms
             // 
             this._registerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._registerButton.Font = new System.Drawing.Font("SF Pro Text", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._registerButton.Location = new System.Drawing.Point(1310, 20);
+            this._registerButton.Location = new System.Drawing.Point(1230, 20);
             this._registerButton.Name = "_registerButton";
             this._registerButton.Size = new System.Drawing.Size(120, 35);
             this._registerButton.TabIndex = 2;
@@ -109,7 +110,7 @@ namespace AquaparkApp.Forms
             // 
             this._logoutButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._logoutButton.Font = new System.Drawing.Font("SF Pro Text", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._logoutButton.Location = new System.Drawing.Point(1200, 20);
+            this._logoutButton.Location = new System.Drawing.Point(1120, 20);
             this._logoutButton.Name = "_logoutButton";
             this._logoutButton.Size = new System.Drawing.Size(100, 35);
             this._logoutButton.TabIndex = 3;

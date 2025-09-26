@@ -24,7 +24,7 @@ namespace AquaparkApp.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 0;
-            BackColor = Color.White;
+            BackColor = Color.Transparent;
             ForeColor = Color.White;
             Font = new Font("SF Pro Text", 14F, FontStyle.Regular);
             Cursor = Cursors.Hand;
@@ -63,10 +63,14 @@ namespace AquaparkApp.Controls
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.Clear(BackColor); // Очищаем фон
+            // Очищаем фон цветом родителя, чтобы не было белых углов на цветной панели
+            var bgColor = Parent?.BackColor ?? BackColor;
+            g.Clear(bgColor);
 
             Rectangle rect = new Rectangle(0, 0, Width, Height);
             GraphicsPath path = GetRoundedRectangle(rect, _cornerRadius);
+            // Ограничиваем область кнопки скругленной формой, чтобы фон по углам не был виден
+            this.Region = new Region(path);
 
             // Определяем цвета в зависимости от состояния
             Color startColor = _isPressed ? Color.FromArgb(0, 80, 180) : 
