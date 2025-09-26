@@ -56,7 +56,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\**" />
+    <Content Include="Resources\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

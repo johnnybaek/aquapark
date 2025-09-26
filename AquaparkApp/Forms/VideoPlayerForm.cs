@@ -16,7 +16,6 @@ namespace AquaparkApp.Forms
         private WF.Panel _controlsPanel;
         private MacOSButton _playButton;
         private MacOSButton _pauseButton;
-        private MacOSButton _stopButton;
         private MacOSButton _closeButton;
         private WF.Label _titleLabel;
         private WF.TrackBar _progressBar;
@@ -26,11 +25,17 @@ namespace AquaparkApp.Forms
         private string _videoPath;
         private MediaElement _mediaElement;
         private ElementHost _host;
+        private TimeSpan _totalDuration = TimeSpan.FromSeconds(150); // default 2.5 minutes
 
         public VideoPlayerForm(string videoPath = null)
         {
-            _videoPath = videoPath ?? Path.Combine(Application.StartupPath, "Resources", "Videos", "demo.mp4");
+            if (videoPath == null)
+            {
+                videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Videos", "demo.mp4");
+            }
+            _videoPath = videoPath;
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             SetupUI();
         }
 
@@ -59,6 +64,7 @@ namespace AquaparkApp.Forms
             _mediaElement = new MediaElement();
             _mediaElement.LoadedBehavior = MediaState.Manual;
             _mediaElement.UnloadedBehavior = MediaState.Manual;
+            _mediaElement.MediaOpened += MediaElement_MediaOpened;
             _host.Child = _mediaElement;
 
             // Заголовок
@@ -100,17 +106,6 @@ namespace AquaparkApp.Forms
                 Enabled = false
             };
             _pauseButton.Click += PauseButton_Click;
-
-            // Кнопка остановки
-            _stopButton = new MacOSButton
-            {
-                Text = "⏹️ Стоп",
-                Size = new Size(100, 40),
-                Location = new Point(290, 20),
-                Font = new Font("SF Pro Display", 12F, FontStyle.Regular),
-                Enabled = false
-            };
-            _stopButton.Click += StopButton_Click;
 
             // Прогресс-бар
             _progressBar = new WF.TrackBar
@@ -155,7 +150,7 @@ namespace AquaparkApp.Forms
             // Добавляем контролы
             _controlsPanel.Controls.AddRange(new WF.Control[]
             {
-                _playButton, _pauseButton, _stopButton, _progressBar, _timeLabel, _closeButton
+                _playButton, _pauseButton, _progressBar, _timeLabel, _closeButton
             });
 
             _mainPanel.Controls.AddRange(new WF.Control[]
@@ -167,14 +162,19 @@ namespace AquaparkApp.Forms
 
             // Загружаем демонстрационное видео
             LoadDemoVideo();
+
+            if (_mediaElement.Source == null)
+            {
+                _timeLabel.Text = $"00:00 / {_totalDuration:mm\\:ss}";
+            }
         }
 
         private void LoadDemoVideo()
         {
             if (!string.IsNullOrEmpty(_videoPath) && File.Exists(_videoPath))
             {
-                _mediaElement.Source = new Uri(_videoPath);
-                _mediaElement.Play();
+                _mediaElement.Source = new Uri("file://" + _videoPath);
+                // Do not auto-play, let user control
             }
             else
             {
@@ -204,7 +204,6 @@ namespace AquaparkApp.Forms
                 _isPlaying = true;
                 _playButton.Enabled = false;
                 _pauseButton.Enabled = true;
-                _stopButton.Enabled = true;
                 _timer.Start();
             }
             else
@@ -212,18 +211,18 @@ namespace AquaparkApp.Forms
                 _isPlaying = true;
                 _playButton.Enabled = false;
                 _pauseButton.Enabled = true;
-                _stopButton.Enabled = true;
                 _timer.Start();
 
                 // Имитация воспроизведения
                 var demoLabel = _videoPanel.Controls[0] as WF.Label;
                 if (demoLabel != null)
                 {
+                    var currentTime = TimeSpan.FromSeconds(_progressBar.Value / 100.0 * _totalDuration.TotalSeconds);
                     demoLabel.Text = "🎬\n\n▶️ Воспроизведение...\n\n" +
                                    "Демонстрация водных горок,\n" +
                                    "бассейнов, СПА-зоны\n" +
                                    "и других развлечений\n\n" +
-                                   "⏱️ 00:15 / 02:30";
+                                   $"⏱️ {currentTime:mm\\:ss} / {_totalDuration:mm\\:ss}";
                 }
             }
         }
@@ -248,40 +247,13 @@ namespace AquaparkApp.Forms
                 var demoLabel = _videoPanel.Controls[0] as WF.Label;
                 if (demoLabel != null)
                 {
+                    var currentTime = TimeSpan.FromSeconds(_progressBar.Value / 100.0 * _totalDuration.TotalSeconds);
                     demoLabel.Text = "🎬\n\n⏸️ Пауза\n\n" +
                                    "Демонстрация водных горок,\n" +
                                    "бассейнов, СПА-зоны\n" +
                                    "и других развлечений\n\n" +
-                                   "⏱️ 00:15 / 02:30";
+                                   $"⏱️ {currentTime:mm\\:ss} / {_totalDuration:mm\\:ss}";
                 }
-            }
-        }
-
-        private void StopButton_Click(object sender, EventArgs e)
-        {
-            if (_mediaElement.Source != null)
-            {
-                _mediaElement.Stop();
-                _mediaElement.Position = TimeSpan.Zero;
-                _isPlaying = false;
-                _playButton.Enabled = true;
-                _pauseButton.Enabled = false;
-                _stopButton.Enabled = false;
-                _timer.Stop();
-                _progressBar.Value = 0;
-                _timeLabel.Text = "00:00 / 00:00";
-            }
-            else
-            {
-                _isPlaying = false;
-                _playButton.Enabled = true;
-                _pauseButton.Enabled = false;
-                _stopButton.Enabled = false;
-                _timer.Stop();
-                _progressBar.Value = 0;
-                _timeLabel.Text = "00:00 / 02:30";
-
-                LoadDemoVideo();
             }
         }
 
@@ -292,22 +264,71 @@ namespace AquaparkApp.Forms
             this.Close();
         }
 
+        private void MediaElement_MediaOpened(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (_mediaElement.NaturalDuration.HasTimeSpan)
+            {
+                _totalDuration = _mediaElement.NaturalDuration.TimeSpan;
+            }
+        }
+
         private void ProgressBar_ValueChanged(object sender, EventArgs e)
         {
-            var currentTime = TimeSpan.FromSeconds(_progressBar.Value * 150 / 100); // 2.5 минуты = 150 секунд
-            var totalTime = TimeSpan.FromSeconds(150);
-            _timeLabel.Text = $"{currentTime:mm\\:ss} / {totalTime:mm\\:ss}";
+            if (_mediaElement.Source != null && _mediaElement.NaturalDuration.HasTimeSpan)
+            {
+                var total = _mediaElement.NaturalDuration.TimeSpan.TotalSeconds;
+                var current = _progressBar.Value / 100.0 * total;
+                _mediaElement.Position = TimeSpan.FromSeconds(current);
+                var currentTime = TimeSpan.FromSeconds(current);
+                _timeLabel.Text = $"{currentTime:mm\\:ss} / {_mediaElement.NaturalDuration.TimeSpan:mm\\:ss}";
+            }
+            else
+            {
+                var currentTime = TimeSpan.FromSeconds(_progressBar.Value / 100.0 * _totalDuration.TotalSeconds);
+                _timeLabel.Text = $"{currentTime:mm\\:ss} / {_totalDuration:mm\\:ss}";
+            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (_isPlaying && _progressBar.Value < _progressBar.Maximum)
+            if (_mediaElement.Source != null && _mediaElement.NaturalDuration.HasTimeSpan)
             {
-                _progressBar.Value += 1;
+                var total = _mediaElement.NaturalDuration.TimeSpan.TotalSeconds;
+                var current = _mediaElement.Position.TotalSeconds;
+                _progressBar.Value = (int)(current / total * 100);
+                var currentTime = TimeSpan.FromSeconds(current);
+                _timeLabel.Text = $"{currentTime:mm\\:ss} / {_mediaElement.NaturalDuration.TimeSpan:mm\\:ss}";
+                if (current >= total)
+                {
+                    _mediaElement.Stop();
+                    _mediaElement.Position = TimeSpan.Zero;
+                    _isPlaying = false;
+                    _playButton.Enabled = true;
+                    _pauseButton.Enabled = false;
+                    _timer.Stop();
+                    _progressBar.Value = 0;
+                    _timeLabel.Text = "00:00 / 00:00";
+                }
             }
-            else if (_progressBar.Value >= _progressBar.Maximum)
+            else
             {
-                StopButton_Click(sender, e);
+                if (_isPlaying && _progressBar.Value < _progressBar.Maximum)
+                {
+                    _progressBar.Value += 1;
+                    var currentTime = TimeSpan.FromSeconds(_progressBar.Value / 100.0 * _totalDuration.TotalSeconds);
+                    _timeLabel.Text = $"{currentTime:mm\\:ss} / {_totalDuration:mm\\:ss}";
+                }
+                else if (_progressBar.Value >= _progressBar.Maximum)
+                {
+                    _isPlaying = false;
+                    _playButton.Enabled = true;
+                    _pauseButton.Enabled = false;
+                    _timer.Stop();
+                    _progressBar.Value = 0;
+                    _timeLabel.Text = $"00:00 / {_totalDuration:mm\\:ss}";
+
+                    LoadDemoVideo();
+                }
             }
         }
 
