@@ -5,8 +5,9 @@ using System.Reflection;
 using System.Linq;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.IO;
 using AquaparkApp.Controls;
 using AquaparkApp.Models;
 using AquaparkApp.BLL;
@@ -96,13 +97,36 @@ namespace AquaparkApp.Forms
 
         private void SetupSidebarPanel()
         {
-            // Создаем панель для прокрутки меню
-            var scrollPanel = new Panel
+            // Создаем панель для прокрутки меню с динамическим размещением кнопок
+            var scrollPanel = new FlowLayoutPanel
             {
                 Dock = DockStyle.Fill,
                 AutoScroll = true,
                 Padding = new Padding(5),
-                BackColor = Color.FromArgb(240, 240, 240)
+                BackColor = Color.FromArgb(240, 240, 240),
+                FlowDirection = FlowDirection.TopDown,
+                WrapContents = false
+            };
+
+            // Словарь для сопоставления тегов с именами файлов иконок
+            var iconMap = new Dictionary<string, string>
+            {
+                { "clients", "профиль.png" },
+                { "tickets", "услуги.png" },
+                { "admin", "админ.png" },
+                { "rentals", "аренда.png" },
+                { "video", "видео.png" },
+                { "zones", "зоны.png" },
+                { "inventory", "инвертарь.png" },
+                { "map", "карта.png" },
+                { "settings", "настройки.png" },
+                { "payments", "оплаты.png" },
+                { "reports", "отчеты.png" },
+                { "visits", "посещения.png" },
+                { "profile", "профиль.png" },
+                { "schedule", "расписание.png" },
+                { "employees", "сотрудники.png" },
+                { "services", "услуги.png" }
             };
 
             // Меню навигации - названия соответствуют таблицам БД
@@ -127,18 +151,14 @@ namespace AquaparkApp.Forms
                 new { Text = "🔧 Админ-панель", Tag = "admin" }
             };
 
-            int y = 10;
             foreach (var item in menuItems)
             {
                 var menuButton = new MacOSButton
                 {
-                    Size = new Size(220, 35),
-                    Location = new Point(10, y),
                     Font = new Font("SF Pro Text", 10F, FontStyle.Regular),
                     Tag = item.Tag,
-                    AutoSize = true,
-                    AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                    Anchor = AnchorStyles.Top | AnchorStyles.Left
+                    Margin = new Padding(0, 0, 0, 10), // Fixed vertical spacing between buttons
+                    Size = new Size(scrollPanel.ClientSize.Width - scrollPanel.Padding.Horizontal, 50)
                 };
 
                 // Extract Russian label (remove emoji prefix)
@@ -146,57 +166,35 @@ namespace AquaparkApp.Forms
                 menuButton.Text = russianLabel;
 
                 // Load and set icon if PNG exists
-                string filename = russianLabel.ToLower().Replace(" ", "") + ".png";
-                try
+                if (iconMap.TryGetValue(item.Tag, out string iconFile))
                 {
-                    using (Image originalImage = Image.FromFile(filename))
+                    string filename = iconFile;
+                    try
                     {
-                        Image resizedImage = new Bitmap(originalImage, 24, 24);
-                        menuButton.Image = resizedImage;
-                        menuButton.ImageAlign = ContentAlignment.MiddleLeft;
-                        menuButton.TextAlign = ContentAlignment.MiddleRight;
-                        menuButton.Padding = new Padding(35, 0, 0, 0);
+                        using (Image originalImage = Image.FromFile(filename))
+                        {
+                            // Convert to macOS-style icon: make it grayscale for consistency
+                            Image macOSIcon = MakeMacOSStyleIcon(originalImage, 48);
+                            menuButton.Image = macOSIcon;
+                            menuButton.ImageAlign = ContentAlignment.MiddleLeft;
+                            menuButton.TextAlign = ContentAlignment.MiddleRight;
+                            menuButton.Padding = new Padding(5, 0, 10, 0); // Small left padding for icon positioning
+                        }
                     }
-                }
-                catch
-                {
-                    // Skip if icon not found
+                    catch
+                    {
+                        // Skip if icon not found
+                    }
                 }
 
                 menuButton.Click += MenuButton_Click;
                 scrollPanel.Controls.Add(menuButton);
-                y += 40;
             }
-
-            // Обновляем ширину кнопок при изменении размера боковой панели
-            scrollPanel.Resize += (s, e) => UpdateSidebarButtonsLayout(scrollPanel);
-            UpdateSidebarButtonsLayout(scrollPanel);
 
             _sidebarPanel.Controls.Add(scrollPanel);
         }
 
-        private void UpdateSidebarButtonsLayout(Panel container)
-        {
-            int leftPadding = 10;
-            int rightPadding = 10;
-            int verticalSpacing = 5;
-            int y = 10;
-            int maxWidth = Math.Max(155, container.ClientSize.Width - leftPadding - rightPadding - 35);
 
-            foreach (Control ctrl in container.Controls)
-            {
-                if (ctrl is MacOSButton btn)
-                {
-                    // Ширина по тексту с небольшим запасом, но не больше доступной
-                    var textSize = TextRenderer.MeasureText(btn.Text, btn.Font);
-                    int desiredWidth = Math.Min(maxWidth, textSize.Width + 35);
-                    btn.Left = leftPadding;
-                    btn.Top = y;
-                    btn.Width = desiredWidth;
-                    y += btn.Height + verticalSpacing;
-                }
-            }
-        }
 
         private void SetupContentPanel()
         {
@@ -924,6 +922,37 @@ namespace AquaparkApp.Forms
             {
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
+        }
+
+        /// <summary>
+        /// Converts an image to macOS-style icon: resizes proportionally to fit within square, centers, and converts to grayscale
+        /// </summary>
+        private Image MakeMacOSStyleIcon(Image originalImage, int targetSize)
+        {
+            // Calculate scale to fit within targetSize x targetSize while preserving aspect ratio
+            float scale = Math.Min((float)targetSize / originalImage.Width, (float)targetSize / originalImage.Height);
+            int newWidth = (int)(originalImage.Width * scale);
+            int newHeight = (int)(originalImage.Height * scale);
+
+            // Create a new bitmap with the target size (square, transparent background)
+            Bitmap iconBitmap = new Bitmap(targetSize, targetSize, PixelFormat.Format32bppArgb);
+            iconBitmap.MakeTransparent();
+
+            using (Graphics g = Graphics.FromImage(iconBitmap))
+            {
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.Clear(Color.Transparent); // Transparent background
+
+                // Calculate position to center the scaled image
+                int x = (targetSize - newWidth) / 2;
+                int y = (targetSize - newHeight) / 2;
+
+                // Draw the original image scaled and centered
+                g.DrawImage(originalImage, x, y, newWidth, newHeight);
+            }
+
+            return iconBitmap;
         }
     }
 }
