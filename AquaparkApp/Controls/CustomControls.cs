@@ -73,9 +73,9 @@ namespace AquaparkApp.Controls
             this.Region = new Region(path);
 
             // Определяем цвета в зависимости от состояния
-            Color startColor = _isPressed ? Color.FromArgb(0, 80, 180) : 
+            Color startColor = _isPressed ? Color.FromArgb(0, 80, 180) :
                           _isHovered ? _hoverStart : _gradientStart;
-            Color endColor = _isPressed ? Color.FromArgb(0, 60, 160) : 
+            Color endColor = _isPressed ? Color.FromArgb(0, 60, 160) :
                         _isHovered ? _hoverEnd : _gradientEnd;
 
             // Рисуем градиентный фон
@@ -85,14 +85,26 @@ namespace AquaparkApp.Controls
                 g.FillPath(brush, path);
             }
 
+            // Рисуем иконку, если есть
+            int textOffset = 0;
+            if (Image != null)
+            {
+                int imageX = Padding.Left;
+                int imageY = (Height - Image.Height) / 2;
+                g.DrawImage(Image, imageX, imageY);
+                textOffset = Image.Width + 8; // 8px spacing
+            }
+
             // Рисуем текст
+            Rectangle textRect = new Rectangle(Padding.Left + textOffset, 0, Width - Padding.Left - Padding.Right - textOffset, Height);
             StringFormat sf = new StringFormat
             {
-                Alignment = StringAlignment.Center,
-                LineAlignment = StringAlignment.Center
+                Alignment = StringAlignment.Near,
+                LineAlignment = StringAlignment.Center,
+                FormatFlags = StringFormatFlags.NoWrap
             };
 
-            g.DrawString(Text, Font, new SolidBrush(ForeColor), rect, sf);
+            g.DrawString(Text, Font, new SolidBrush(ForeColor), textRect, sf);
         }
 
         private GraphicsPath GetRoundedRectangle(Rectangle rect, int radius)
