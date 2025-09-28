@@ -132,7 +132,6 @@ namespace AquaparkApp.Forms
             {
                 var menuButton = new MacOSButton
                 {
-                    Text = item.Text,
                     Size = new Size(220, 35),
                     Location = new Point(10, y),
                     Font = new Font("SF Pro Text", 10F, FontStyle.Regular),
@@ -141,6 +140,29 @@ namespace AquaparkApp.Forms
                     AutoSizeMode = AutoSizeMode.GrowAndShrink,
                     Anchor = AnchorStyles.Top | AnchorStyles.Left
                 };
+
+                // Extract Russian label (remove emoji prefix)
+                string russianLabel = item.Text.Substring(2).Trim();
+                menuButton.Text = russianLabel;
+
+                // Load and set icon if PNG exists
+                string filename = russianLabel.ToLower().Replace(" ", "") + ".png";
+                try
+                {
+                    using (Image originalImage = Image.FromFile(filename))
+                    {
+                        Image resizedImage = new Bitmap(originalImage, 24, 24);
+                        menuButton.Image = resizedImage;
+                        menuButton.ImageAlign = ContentAlignment.MiddleLeft;
+                        menuButton.TextAlign = ContentAlignment.MiddleRight;
+                        menuButton.Padding = new Padding(35, 0, 0, 0);
+                    }
+                }
+                catch
+                {
+                    // Skip if icon not found
+                }
+
                 menuButton.Click += MenuButton_Click;
                 scrollPanel.Controls.Add(menuButton);
                 y += 40;
@@ -159,7 +181,7 @@ namespace AquaparkApp.Forms
             int rightPadding = 10;
             int verticalSpacing = 5;
             int y = 10;
-            int maxWidth = Math.Max(120, container.ClientSize.Width - leftPadding - rightPadding);
+            int maxWidth = Math.Max(155, container.ClientSize.Width - leftPadding - rightPadding - 35);
 
             foreach (Control ctrl in container.Controls)
             {
@@ -167,7 +189,7 @@ namespace AquaparkApp.Forms
                 {
                     // Ширина по тексту с небольшим запасом, но не больше доступной
                     var textSize = TextRenderer.MeasureText(btn.Text, btn.Font);
-                    int desiredWidth = Math.Min(maxWidth, textSize.Width + 24);
+                    int desiredWidth = Math.Min(maxWidth, textSize.Width + 35);
                     btn.Left = leftPadding;
                     btn.Top = y;
                     btn.Width = desiredWidth;
